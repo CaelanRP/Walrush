@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class Entity : MonoBehaviour
 {
@@ -9,8 +10,9 @@ public class Entity : MonoBehaviour
     void Awake(){
         rb = GetComponent<Rigidbody>();
     }
-
+    [BoxGroup("Movement Physics")]
     public float defaultXZDrag;
+    [BoxGroup("Movement Physics")]
     public float defaultGravityMultiplier = 1;
 
     protected virtual void FixedUpdate(){
