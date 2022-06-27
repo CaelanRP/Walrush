@@ -7,6 +7,8 @@ public class CameraController : MonoBehaviour
     [HideInInspector]
     public Camera cam;
     public static CameraController Instance;
+
+    public float horizontalLerpRate, depthLerpRate;
     void OnEnable(){
         if (Instance != null && Instance != this)
         {
@@ -22,9 +24,15 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    Vector3 target;
+    void LateUpdate()
     {
-        
+        target.x = Walrus.Instance.transform.position.x;
+        target.z = Walrus.Instance.transform.position.z;
+
+        float x = Mathf.Lerp(transform.position.x, target.x, horizontalLerpRate * Time.deltaTime);
+        float z = Mathf.Lerp(transform.position.z, target.z, depthLerpRate * Time.deltaTime);
+        transform.position = new Vector3(x,transform.position.y, z);
     }
 
     public Vector3 currentDown{

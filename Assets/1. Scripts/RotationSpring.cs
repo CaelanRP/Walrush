@@ -8,6 +8,8 @@ public class RotationSpringInstance
 {
     public bool useTimeScale = true;
     public float spring = 15, damper = 15;
+    public float minDampVelocity;
+    public Vector3 initialRotation;
 
     Vector3 targetForward, targetUp;
     Vector3 vel;
@@ -16,6 +18,8 @@ public class RotationSpringInstance
     {
         targetForward = transform.parent.InverseTransformDirection(transform.forward);
         targetUp = transform.parent.InverseTransformDirection(transform.up);
+
+        transform.eulerAngles = initialRotation;
     }
 
     public void DoUpdate(Transform transform)
@@ -26,7 +30,9 @@ public class RotationSpringInstance
         Vector3 forwardDelta = Vector3.Cross(transform.forward, worldForward).normalized * Vector3.Angle(transform.forward, worldForward);
         Vector3 upDelta = Vector3.Cross(transform.up, worldUp).normalized * Vector3.Angle(transform.up, worldUp);
 
-        vel = FRILerp.Lerp(vel, (forwardDelta + upDelta) * spring, damper);
+
+        var damp = (forwardDelta + upDelta).magnitude > minDampVelocity ? damper : 0;
+        vel = FRILerp.Lerp(vel, (forwardDelta + upDelta) * spring, damp);
 
         transform.Rotate(vel * Time.deltaTime, Space.World);
     }
