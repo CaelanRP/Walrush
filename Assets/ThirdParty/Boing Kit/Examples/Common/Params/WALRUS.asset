@@ -20,11 +20,11 @@ MonoBehaviour:
     PositionParameterMode: 1
     RotationParameterMode: 1
     PositionExponentialHalfLife: 0.02
-    PositionOscillationHalfLife: 0.07
-    PositionOscillationFrequency: 5.7
+    PositionOscillationHalfLife: 0.47
+    PositionOscillationFrequency: 2.57
     PositionOscillationDampingRatio: 0.1
-    MoveReactionMultiplier: 0
-    LinearImpulseMultiplier: 0
+    MoveReactionMultiplier: 3.72
+    LinearImpulseMultiplier: 3.85
     RotationExponentialHalfLife: 0.02
     RotationOscillationHalfLife: 0.22
     RotationOscillationFrequency: 5.93
