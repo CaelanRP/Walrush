@@ -12,6 +12,12 @@ public class Entity : MonoBehaviour
     }
     [BoxGroup("Movement Physics")]
     public float defaultXZDrag;
+
+    public virtual float XZDrag{
+        get{
+            return defaultXZDrag;
+        }
+    }
     [BoxGroup("Movement Physics")]
     public float defaultGravityMultiplier = 1;
 
@@ -21,8 +27,8 @@ public class Entity : MonoBehaviour
     }
 
     protected virtual void UpdateDrag(){
-        Vector3 XZdrag = Util.ZeroY(rb.velocity) * -defaultXZDrag;
-        rb.AddForce(XZdrag);
+        Vector3 drag = Util.ZeroY(rb.velocity) * -XZDrag;
+        rb.AddForce(drag);
     }
 
     protected virtual void UpdateGravity(){

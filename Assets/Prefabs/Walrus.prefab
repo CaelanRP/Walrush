@@ -70,7 +70,12 @@ MonoBehaviour:
   minAngularDrag: 1
   maxAngularDrag: 6
   initialRushForce: 5000
-  walrusState: 0
+  XZDragRush: 0
+  minRotateSpeedRush: 0
+  maxRotateSpeedRush: 400
+  rotateIncreaseRateRush: 600
+  minAngularDragRush: 1
+  maxAngularDragRush: 6
 --- !u!1 &8680405210510269291
 GameObject:
   m_ObjectHideFlags: 0

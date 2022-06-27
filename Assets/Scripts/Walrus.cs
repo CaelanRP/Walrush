@@ -12,17 +12,21 @@ public class Walrus : Entity
     public float minRotateSpeed, maxRotateSpeed, rotateIncreaseRate, minAngularDrag, maxAngularDrag;
 
    [TitleGroup("Movement Physics/Rush")]
-   public float initialRushForce;
+   public float initialRushForce, XZDragRush, minRotateSpeedRush, maxRotateSpeedRush, rotateIncreaseRateRush, minAngularDragRush, maxAngularDragRush;
     float currentRotateForce;
+
+    public float currentMinRotateSpeed{ get{ return rushing ? minRotateSpeedRush : minRotateSpeed; } }
+
+    public float currentMaxRotateSpeed{ get{ return rushing ? maxRotateSpeedRush : maxRotateSpeed; } }
+
+    public float currentRotateIncreaseRate{ get{ return rushing ? rotateIncreaseRateRush : rotateIncreaseRate; } }
+
+    public float currentMinAngularDrag{ get{ return rushing ? minAngularDragRush : minAngularDrag; } }
+    public float currentMaxAngularDrag{ get{ return rushing ? maxAngularDragRush : maxAngularDrag; } }
+
     Rewired.Player _i;
 
-    public enum WALRUSSTATE{
-        Waddle,
-        Rush
-    }
-
-    [ReadOnly]
-    public WALRUSSTATE walrusState;
+    bool rushing;
     
     public Rewired.Player input{
         get{
@@ -30,6 +34,12 @@ public class Walrus : Entity
                 _i = Rewired.ReInput.players.SystemPlayer; 
             }
             return _i;
+        }
+    }
+
+    public override float XZDrag{
+        get{
+            return rushing ? XZDragRush : defaultXZDrag;
         }
     }
 
@@ -41,15 +51,24 @@ public class Walrus : Entity
         TestRush();
     }
 
+    
     void TestRush(){
-        if (canRush){
-            if (input.GetButtonDown("Rush")){
-                Rush();
+        if (rushing){
+            if (!input.GetButton("Rush")){
+                rushing = false;
+            }
+        }
+        else {
+            if (canRush){
+                if (input.GetButtonDown("Rush")){
+                    StartRush();
+                }
             }
         }
     }
 
-    void Rush(){
+    void StartRush(){
+        rushing = true;
         rb.AddForce(transform.forward * initialRushForce, ForceMode.Impulse);
     }
 
@@ -72,16 +91,20 @@ public class Walrus : Entity
         
         cameraRelativeMoveVector = CameraController.Instance.transform.TransformVector(new Vector3(currentWalkVector.x, 0, currentWalkVector.y));
 
-
         if (currentWalkVector.magnitude > 0.1f){
             ApplyWalkTorque();
         }
 
         else{
-            currentRotateForce = Mathf.Max(currentRotateForce - rotateIncreaseRate * Time.fixedDeltaTime, maxRotateSpeed);
+            currentRotateForce = Mathf.Max(currentRotateForce - currentRotateIncreaseRate * Time.fixedDeltaTime, currentMinRotateSpeed);
         }
         
-        rb.AddForce(transform.forward * currentWalkVector.magnitude * waddleSpeed);
+        if (rushing){
+            rb.velocity = Vector3.RotateTowards(rb.velocity, transform.forward, Mathf.Infinity, 0);
+        }
+        else{
+            rb.AddForce(transform.forward * currentWalkVector.magnitude * waddleSpeed);
+        }
         //rb.AddForce(new Vector2)
     }
 
@@ -91,10 +114,10 @@ public class Walrus : Entity
 
         if (unsignedAngle > 5){
 
-            currentRotateForce = Mathf.Min(currentRotateForce + rotateIncreaseRate * Time.fixedDeltaTime, maxRotateSpeed);
+            currentRotateForce = Mathf.Min(currentRotateForce + currentRotateIncreaseRate * Time.fixedDeltaTime, currentMaxRotateSpeed);
             rb.AddTorque(Vector3.up * Mathf.Sign(angle) * currentRotateForce);
         }
 
-        rb.angularDrag = Mathf.Lerp(maxAngularDrag, minAngularDrag, unsignedAngle / 180);
+        rb.angularDrag = Mathf.Lerp(currentMaxAngularDrag, currentMinAngularDrag, unsignedAngle / 180);
     }
 }
