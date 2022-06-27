@@ -57,20 +57,20 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Cutoff: 0.5
-    - _Depth: 13
+    - _Depth: 20
     - _Depthdarkness: 0
     - _DistanceFade: 300
     - _ENABLE_GRADIENT: 0
     - _ENABLE_SHADOWS: 0
     - _ENABLE_VC: 0
-    - _EdgeFade: 0.2448298
+    - _EdgeFade: 0.5
     - _FoamDistortion: 0.45
     - _FoamOpacity: 0
     - _FoamSize: 0
     - _FoamSpeed: 0.1
     - _FoamTiling: 0.15
-    - _Fresnelexponent: 2.6
-    - _Glossiness: 1
+    - _Fresnelexponent: 2.77
+    - _Glossiness: 0.01
     - _HighlightPanning: 0
     - _LIGHTING: 1
     - _MACRO_WAVES: 0
@@ -78,19 +78,19 @@ Material:
     - _MaxDistance: 1000
     - _Metallicness: 0
     - _NORMAL_MAP: 1
-    - _NormalStrength: 0.166
+    - _NormalStrength: 0.164
     - _NormalTiling: 0.56200004
     - _Pixelate: 0
     - _RT_REFRACTION: 0
     - _ReflectionFresnel: 2
     - _ReflectionRefraction: 0
     - _ReflectionStrength: 0
-    - _RefractionAmount: 0.057
+    - _RefractionAmount: 0.037
     - _RimDistance: 0.899
-    - _RimDistortion: 0.139
-    - _RimSize: 4.6
-    - _Rimfalloff: 1.8
-    - _Rimtiling: 0.5
+    - _RimDistortion: 0
+    - _RimSize: 3.6
+    - _Rimfalloff: 0.4
+    - _Rimtiling: 2.1000001
     - _SECONDARY_WAVES: 0
     - _SurfaceHighlight: 0.03
     - _SurfaceHighlightsDistortion: 0.45
@@ -99,7 +99,7 @@ Material:
     - _Surfacehightlightsize: 0
     - _Tessellation: 0.01
     - _Tiling: 0.955
-    - _Transparency: 1
+    - _Transparency: 0.9
     - _USE_VC_INTERSECTION: 0
     - _Unlit: 0
     - _UseIntersectionFoam: 1
@@ -109,13 +109,13 @@ Material:
     - _WaveSize: 0.1
     - _Wavesspeed: 1.95
     - _Wavesstrength: 0.031
-    - _Wavetint: -0.077
+    - _Wavetint: 0
     - _Worldspacetiling: 0
     - __dirty: 1
     m_Colors:
-    - _FresnelColor: {r: 0.5, g: 0.8551724, b: 1, a: 0.084}
+    - _FresnelColor: {r: 0.46925062, g: 0.77183187, b: 0.8962264, a: 0.084}
     - _RimColor: {r: 1, g: 1, b: 1, a: 0.509}
-    - _WaterColor: {r: 0.008677464, g: 0.07238967, b: 0.122641504, a: 0}
-    - _WaterShallowColor: {r: 0.41911757, g: 1, b: 0.8798174, a: 1}
+    - _WaterColor: {r: 0, g: 0.057254404, b: 0.103773594, a: 0}
+    - _WaterShallowColor: {r: 0.132387, g: 0.16037738, b: 0.15312792, a: 1}
     - _WaveDirection: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
