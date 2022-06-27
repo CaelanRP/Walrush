@@ -85,13 +85,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 23244516882313655}
   m_LocalRotation: {x: -0.26819128, y: -0.000000114842116, z: 0.00000003197089, w: 0.9633657}
-  m_LocalPosition: {x: -0, y: 0, z: 0.009762066}
+  m_LocalPosition: {x: -0, y: 0, z: -0.0002}
   m_LocalScale: {x: 1, y: 0.9999999, z: 1}
   m_Children:
   - {fileID: 8654302045851845760}
   - {fileID: 4034741235368986900}
   m_Father: {fileID: 2647377139381013351}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &70606030861138610
 GameObject:
@@ -1045,6 +1045,38 @@ Transform:
   - {fileID: 6206302891024269425}
   m_Father: {fileID: 1136878984319256324}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1733051346555660228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7951370881854531459}
+  m_Layer: 0
+  m_Name: Armature
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7951370881854531459
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733051346555660228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2647377139381013351}
+  - {fileID: 7817172237598671004}
+  m_Father: {fileID: 6344879361650351097}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1800630603232079267
 GameObject:
@@ -2523,13 +2555,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4477304986681524525}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0.95000005, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
-  - {fileID: 349360719330715659}
   - {fileID: 4796462748965341670}
-  m_Father: {fileID: 6344879361650351097}
+  - {fileID: 349360719330715659}
+  m_Father: {fileID: 7951370881854531459}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4483481213112223295
@@ -3987,15 +4019,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5922187734055401182}
   m_LocalRotation: {x: -0.00000018255581, y: 0.25796673, z: 0.9661538, w: -0.000000029399642}
-  m_LocalPosition: {x: -0, y: 0, z: 0.009762066}
-  m_LocalScale: {x: 1, y: 0.9999998, z: 0.9999994}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8760133641454905369}
   - {fileID: 5709704850774535036}
   - {fileID: 6601890308362988554}
   - {fileID: 3007152528208812432}
   m_Father: {fileID: 2647377139381013351}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5954353315542012700
 GameObject:
@@ -4116,8 +4148,7 @@ Transform:
   m_LocalPosition: {x: 1.1737845, y: 0.6199999, z: -1.3965588}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2647377139381013351}
-  - {fileID: 7817172237598671004}
+  - {fileID: 7951370881854531459}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4176,11 +4207,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6056023016177864310}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
-  m_Father: {fileID: 6344879361650351097}
+  m_Father: {fileID: 7951370881854531459}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &3123047175059224972
