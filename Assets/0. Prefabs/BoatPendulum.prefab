@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2955116610608049744}
   - component: {fileID: 2955116610608049759}
+  - component: {fileID: 1244819427790332458}
+  - component: {fileID: 6990195577531110819}
   m_Layer: 0
   m_Name: RotationSpring
   m_TagString: Untagged
@@ -46,10 +48,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpringInstance:
     useTimeScale: 1
-    spring: 8
+    spring: 5
     damper: 1
     minDampVelocity: 1
-    initialRotation: {x: 5, y: 0, z: 5}
+    initialRotation: {x: 2, y: 0, z: 2}
+--- !u!114 &1244819427790332458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2955116610608049745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bf171aff2d396b419f3ab05dd90388b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useTimeScale: 1
+  spring: 5
+  damper: 1
+--- !u!114 &6990195577531110819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2955116610608049745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb7ebcafc5b8f9042895151172578e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotation: {fileID: 2955116610608049759}
+  position: {fileID: 1244819427790332458}
 --- !u!1 &2955116611518277708
 GameObject:
   m_ObjectHideFlags: 0

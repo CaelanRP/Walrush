@@ -78,7 +78,9 @@ MonoBehaviour:
   minAngularDragRush: 1
   maxAngularDragRush: 6
   rushRotationControlVelocityCap: 3
-  minBounceVelocity: 4
+  minBounceVelocity: 6
+  goreSlamBoatDip: 5
+  goreSlamBoatTip: 7
 --- !u!1 &8680405210510269291
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,8 @@ public class Walrus : Entity
    public float initialRushForce, XZDragRush, minRotateSpeedRush, maxRotateSpeedRush, rotateIncreaseRateRush, rushForceLerp, minAngularDragRush, maxAngularDragRush, rushRotationControlVelocityCap;
     [TitleGroup("Movement Physics/Bounce")]
     public float minBounceVelocity;
+    [BoxGroup("Additional Stats")][TitleGroup("Additional Stats/Gore")]
+    public float goreSlamBoatDip, goreSlamBoatTip;
     float currentRotateForce;
 
     public float currentMinRotateSpeed{ get{ return rushing ? minRotateSpeedRush : minRotateSpeed; } }
@@ -62,6 +64,7 @@ public class Walrus : Entity
 
     void HandleInput(){
         TestRush();
+        TestGore();
     }
 
     
@@ -78,6 +81,16 @@ public class Walrus : Entity
                 }
             }
         }
+    }
+
+    void TestGore(){
+        if (input.GetButtonDown("Gore")){
+            Gore();
+        }
+    }
+
+    void Gore(){
+        BoatRotator.Instance.Slam(goreSlamBoatTip, goreSlamBoatDip, transform.position);
     }
 
     void StartRush(){
