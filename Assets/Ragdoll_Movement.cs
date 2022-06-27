@@ -35,8 +35,8 @@ public class Ragdoll_Movement : MonoBehaviour
 
         if (ragdoll.data.isGrounded)
         {
-            Standing();
             Move();
+            Standing();
         }
 
         Drag();

@@ -41,13 +41,17 @@ public class Ragdoll : MonoBehaviour
     }
 
     public Ragdoll_Data data;
+
     [System.Serializable]
     public class Ragdoll_Data
     {
         public Ragdoll ragdoll;
         public float sinceGrounded;
         public bool isGrounded = false;
-        internal float distanceToGround;
+        public float distanceToGround;
+        public Vector3 movementDirection;
+        internal Vector3 targetPosition;
+        internal Transform target;
 
         internal void Collide(Collision col)
         {
@@ -65,7 +69,6 @@ public class Ragdoll : MonoBehaviour
         }
 
         bool wasGrounded = false;
-        internal Vector3 movementDirection;
 
         public void FixedUpd()
         {
