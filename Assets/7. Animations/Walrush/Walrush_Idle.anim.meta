@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/7. Animations/Walrush/Walrush_Idle.anim.meta
 guid: 9dfec553c018ff34399fbbe7d98b7a58
 NativeFormatImporter:
+========
+guid: 784c95878020e8c439270fe37dc09575
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> origin/nick:Assets/ThirdParty/Boing Kit/Examples/Boing Field & Sampler/Warped Teapots/Materials.meta
   externalObjects: {}
   mainObjectFileID: 7400000
   userData: 
