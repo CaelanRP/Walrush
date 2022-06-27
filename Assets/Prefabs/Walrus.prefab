@@ -47,7 +47,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 80
+  m_Constraints: 64
   m_CollisionDetection: 1
 --- !u!114 &8680405210127125741
 MonoBehaviour:
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultXZDrag: 500
-  defaultGravityMultiplier: 1
+  defaultGravityMultiplier: 5
   waddleSpeed: 1000
   minRotateSpeed: 0
   maxRotateSpeed: 550
@@ -70,7 +70,7 @@ MonoBehaviour:
   minAngularDrag: 1
   maxAngularDrag: 6
   initialRushForce: 1200
-  XZDragRush: 25
+  XZDragRush: 20
   minRotateSpeedRush: 0
   maxRotateSpeedRush: 400
   rotateIncreaseRateRush: 600
@@ -78,7 +78,7 @@ MonoBehaviour:
   minAngularDragRush: 1
   maxAngularDragRush: 6
   rushRotationControlVelocityCap: 3
-  minBounceVelocity: 0
+  minBounceVelocity: 4
 --- !u!1 &8680405210510269291
 GameObject:
   m_ObjectHideFlags: 0

@@ -97,6 +97,10 @@ public class Walrus : Entity
         HandleInputFixed();
         previousVelocity = rb.velocity;
         Debug.Log(rb.velocity.magnitude);
+
+        if (transform.eulerAngles.z != 0){
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
+        }
     }
 
     Vector2 currentWalkVector;
@@ -106,20 +110,22 @@ public class Walrus : Entity
         
         cameraRelativeMoveVector = CameraController.Instance.transform.TransformVector(new Vector3(currentWalkVector.x, 0, currentWalkVector.y));
 
-        if (currentWalkVector.magnitude > 0.1f){
-            ApplyWalkTorque();
-        }
+        if (Time.time - lastBounced > 0.1f){
+            if (currentWalkVector.magnitude > 0.1f){
+                ApplyWalkTorque();
+            }
 
-        else{
-            currentRotateForce = Mathf.Max(currentRotateForce - currentRotateIncreaseRate * Time.fixedDeltaTime, currentMinRotateSpeed);
-        }
-        
-        if (rushing){
+            else{
+                currentRotateForce = Mathf.Max(currentRotateForce - currentRotateIncreaseRate * Time.fixedDeltaTime, currentMinRotateSpeed);
+            }
             
-            rb.velocity = Vector3.Lerp(rb.velocity, transform.forward * rb.velocity.magnitude, rushForceLerp * Time.fixedDeltaTime);
-        }
-        else{
-            rb.AddForce(transform.forward * currentWalkVector.magnitude * waddleSpeed);
+            if (rushing){
+                
+                rb.velocity = Vector3.Lerp(rb.velocity, transform.forward * rb.velocity.magnitude, rushForceLerp * Time.fixedDeltaTime);
+            }
+            else{
+                rb.AddForce(transform.forward * currentWalkVector.magnitude * waddleSpeed);
+            }
         }
         //rb.AddForce(new Vector2)
     }
@@ -141,9 +147,28 @@ public class Walrus : Entity
         rb.angularDrag = Mathf.Lerp(currentMaxAngularDrag, currentMinAngularDrag, unsignedAngle / 180);
     }
 
+    float lastBounced;
     void OnCollisionEnter(Collision coll){
         if (coll.gameObject.tag == "Wall"){
-            rb.velocity = Vector3.Reflect(previousVelocity, coll.GetContact(0).normal);
+            Vector3 vel = Util.ZeroY(Vector3.Reflect(previousVelocity, coll.GetContact(0).normal));
+            rb.velocity = vel;
+            if (rushing){
+                transform.forward = Util.ZeroY(vel);
+                lastBounced = Time.time;
+                StartCoroutine(SetVelocityAndRotationNextFrame(vel));
+                rb.angularVelocity = Vector3.zero;
+            }
         }
+    }
+
+    IEnumerator SetVelocityAndRotationNextFrame(Vector3 velocity){
+        yield return new WaitForFixedUpdate();
+        rb.velocity = velocity;
+        transform.forward = Util.ZeroY(velocity);
+        rb.angularVelocity = Vector3.zero;
+    }
+
+    void UpdateGrounded(){
+        
     }
 }

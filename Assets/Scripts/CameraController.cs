@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour
 
     // Update is called once per frame
     Vector3 target;
-    void Update()
+    void LateUpdate()
     {
         target.x = Walrus.Instance.transform.position.x;
         target.z = Walrus.Instance.transform.position.z;
