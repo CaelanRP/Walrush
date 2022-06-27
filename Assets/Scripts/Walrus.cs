@@ -12,7 +12,7 @@ public class Walrus : Entity
     public float minRotateSpeed, maxRotateSpeed, rotateIncreaseRate, minAngularDrag, maxAngularDrag;
 
    [TitleGroup("Movement Physics/Rush")]
-   public float initialRushForce, XZDragRush, minRotateSpeedRush, maxRotateSpeedRush, rotateIncreaseRateRush, minAngularDragRush, maxAngularDragRush;
+   public float initialRushForce, XZDragRush, minRotateSpeedRush, maxRotateSpeedRush, rotateIncreaseRateRush, rushForceLerp, minAngularDragRush, maxAngularDragRush;
     float currentRotateForce;
 
     public float currentMinRotateSpeed{ get{ return rushing ? minRotateSpeedRush : minRotateSpeed; } }
@@ -100,7 +100,7 @@ public class Walrus : Entity
         }
         
         if (rushing){
-            rb.velocity = Vector3.RotateTowards(rb.velocity, transform.forward, Mathf.Infinity, 0);
+            rb.velocity = Vector3.Lerp(rb.velocity, transform.forward * rb.velocity.magnitude, rushForceLerp * Time.fixedDeltaTime);
         }
         else{
             rb.AddForce(transform.forward * currentWalkVector.magnitude * waddleSpeed);
