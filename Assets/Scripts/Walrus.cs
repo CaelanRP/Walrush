@@ -7,7 +7,7 @@ using Sirenix.OdinInspector;
 public class Walrus : Entity
 {
     [BoxGroup("Movement Physics")][TitleGroup("Movement Physics/Waddle")]
-    public float waddleSpeed;
+    public float waddleSpeed, waddleStepSpeed;
     [TitleGroup("Movement Physics/Waddle")]
     public float minRotateSpeed, maxRotateSpeed, rotateIncreaseRate, minAngularDrag, maxAngularDrag;
 
@@ -49,6 +49,8 @@ public class Walrus : Entity
 
     public static Walrus Instance;
 
+    Animator animator;
+
     void OnEnable(){
         if (Instance != null && Instance != this)
         {
@@ -58,8 +60,13 @@ public class Walrus : Entity
         Instance = this;
     }
 
+    void Start(){
+        animator = GetComponentInChildren<Animator>();
+    }
+
     void Update(){
         HandleInput();
+        UpdateAnimationValues();
     }
 
     void HandleInput(){
@@ -126,10 +133,12 @@ public class Walrus : Entity
         if (Time.time - lastBounced > 0.1f){
             if (currentWalkVector.magnitude > 0.1f){
                 ApplyWalkTorque();
+                
             }
 
             else{
                 currentRotateForce = Mathf.Max(currentRotateForce - currentRotateIncreaseRate * Time.fixedDeltaTime, currentMinRotateSpeed);
+                animator.SetFloat("walking", 0, 0.5f, Time.fixedDeltaTime);
             }
             
             if (rushing){
@@ -141,6 +150,10 @@ public class Walrus : Entity
             }
         }
         //rb.AddForce(new Vector2)
+    }
+
+    public void Step(){
+        rb.AddForce(transform.forward * currentWalkVector.magnitude * waddleStepSpeed, ForceMode.Impulse);
     }
 
     void ApplyWalkTorque(){
@@ -155,8 +168,11 @@ public class Walrus : Entity
                 currentRotateForce *= rotateForceMultiplier;
             }
             rb.AddTorque(Vector3.up * Mathf.Sign(angle) * currentRotateForce);
+            animator.SetFloat("walking", 1, 1, Time.fixedDeltaTime);
         }
-
+        else{
+            animator.SetFloat("walking", 1, 1, Time.fixedDeltaTime);
+        }
         rb.angularDrag = Mathf.Lerp(currentMaxAngularDrag, currentMinAngularDrag, unsignedAngle / 180);
     }
 
@@ -183,5 +199,10 @@ public class Walrus : Entity
 
     void UpdateGrounded(){
         
+    }
+
+    void UpdateAnimationValues(){
+        animator.SetFloat("forwardVelocity", rb.velocity.magnitude);
+        animator.SetFloat("rotationalVelocity", rb.angularVelocity.magnitude);   
     }
 }
