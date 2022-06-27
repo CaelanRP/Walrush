@@ -10,6 +10,15 @@ public class Ragdoll_AnimationTargeting : MonoBehaviour
     public float followForce;
     public float followForceTorque;
 
+    public float hipDeltaForce;
+    public Transform hipTarget;
+    Vector3 lastHipPos;
+
+    private void Start()
+    {
+        lastHipPos = hipTarget.position;
+    }
+
     [System.Serializable]
     public class RigTargets
     {
@@ -21,6 +30,7 @@ public class Ragdoll_AnimationTargeting : MonoBehaviour
     void FixedUpdate()
     {
         float forceM = 1;
+        Vector3 hipDelta = hipTarget.position - lastHipPos;
 
         for (int i = 0; i < rigTargets.Length; i++)
         {
@@ -33,6 +43,7 @@ public class Ragdoll_AnimationTargeting : MonoBehaviour
             Vector3 force = targetPos - rigTargets[i].rig.position;
 
             rigTargets[i].rig.AddForce(force * followForce * forceM, ForceMode.Acceleration);
+            rigTargets[i].rig.AddForce(hipDelta * hipDeltaForce * forceM, ForceMode.Acceleration);
 
 
             Vector3 torque = Vector3.Cross(rigTargets[i].rig.transform.forward, rigTargets[i].target.transform.forward) * Vector3.Angle(rigTargets[i].rig.transform.forward, rigTargets[i].target.transform.forward);
@@ -41,5 +52,7 @@ public class Ragdoll_AnimationTargeting : MonoBehaviour
             rigTargets[i].rig.AddTorque(torque * followForceTorque * forceM, ForceMode.Acceleration);
 
         }
+
+        lastHipPos = hipTarget.position;
     }
 }

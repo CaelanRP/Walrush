@@ -532,11 +532,11 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -55
+    limit: -85
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 85
+    limit: 100
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -620,6 +620,8 @@ GameObject:
   - component: {fileID: 1374783398763674674}
   - component: {fileID: 1374783398763674673}
   - component: {fileID: 1374783398763674672}
+  - component: {fileID: 714872420}
+  - component: {fileID: 6954965782659904186}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -690,8 +692,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementForce: 0
   gravity: 55
-  drag: 0.9
-  angularDrag: 0.9
+  drag: 0.8
+  angularDrag: 0.8
   standCurve:
     serializedVersion: 2
     m_Curve:
@@ -717,6 +719,63 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   standForce: 2000
+--- !u!114 &714872420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374783398763674636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b7e5ece9b79709419a008a68884ab8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigRelativeTo: {fileID: 1374783399859830261}
+  targetRelativeTo: {fileID: 8236003498574182469}
+  rigTargets:
+  - rig: {fileID: 1374783400128184230}
+    target: {fileID: 717340642025224519}
+  - rig: {fileID: 1374783399817799209}
+    target: {fileID: 8092704940558480271}
+  - rig: {fileID: 1374783399051760147}
+    target: {fileID: 4136113638594382166}
+  - rig: {fileID: 1374783399971065312}
+    target: {fileID: 5743249333282434829}
+  - rig: {fileID: 1374783398275767119}
+    target: {fileID: 7694869104902412199}
+  - rig: {fileID: 1374783399429529740}
+    target: {fileID: 8523167035418330606}
+  - rig: {fileID: 1374783398283572710}
+    target: {fileID: 1018085495690984069}
+  - rig: {fileID: 1374783399042680565}
+    target: {fileID: 4260260955780835907}
+  - rig: {fileID: 1374783398955299833}
+    target: {fileID: 3913138425281429557}
+  - rig: {fileID: 1374783399111287370}
+    target: {fileID: 8715641561258289937}
+  - rig: {fileID: 1374783400088720363}
+    target: {fileID: 8111860489518326491}
+  - rig: {fileID: 1374783399864746963}
+    target: {fileID: 3700788779946361764}
+  - rig: {fileID: 1374783399859830257}
+    target: {fileID: 8236003498574182469}
+  followForce: 50
+  followForceTorque: 100
+  hipDeltaForce: 1000
+  hipTarget: {fileID: 8236003498574182469}
+--- !u!114 &6954965782659904186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374783398763674636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc7cfa1f3778884da8d77090797bb11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1374783398955299828
 GameObject:
   m_ObjectHideFlags: 0
@@ -1101,11 +1160,11 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -100
+    limit: -140
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 0
+    limit: -10
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -1416,7 +1475,7 @@ GameObject:
   - component: {fileID: 1374783399111287371}
   - component: {fileID: 1374783399111287374}
   m_Layer: 0
-  m_Name: Leg_Let
+  m_Name: Leg_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1547,11 +1606,11 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -55
+    limit: -85
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 85
+    limit: 100
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -2800,11 +2859,11 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -100
+    limit: -140
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 0
+    limit: -10
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -3832,7 +3891,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2590032710243733465
 Transform:
   m_ObjectHideFlags: 0
