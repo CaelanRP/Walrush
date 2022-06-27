@@ -12,7 +12,9 @@ public class Walrus : Entity
     public float minRotateSpeed, maxRotateSpeed, rotateIncreaseRate, minAngularDrag, maxAngularDrag;
 
    [TitleGroup("Movement Physics/Rush")]
-   public float initialRushForce, XZDragRush, minRotateSpeedRush, maxRotateSpeedRush, rotateIncreaseRateRush, rushForceLerp, minAngularDragRush, maxAngularDragRush;
+   public float initialRushForce, XZDragRush, minRotateSpeedRush, maxRotateSpeedRush, rotateIncreaseRateRush, rushForceLerp, minAngularDragRush, maxAngularDragRush, rushRotationControlVelocityCap;
+    [TitleGroup("Movement Physics/Bounce")]
+    public float minBounceVelocity;
     float currentRotateForce;
 
     public float currentMinRotateSpeed{ get{ return rushing ? minRotateSpeedRush : minRotateSpeed; } }
@@ -31,7 +33,7 @@ public class Walrus : Entity
     public Rewired.Player input{
         get{
             if (_i == null){
-                _i = Rewired.ReInput.players.SystemPlayer; 
+                _i = Rewired.ReInput.players.GetPlayer(0); 
             }
             return _i;
         }
@@ -41,6 +43,17 @@ public class Walrus : Entity
         get{
             return rushing ? XZDragRush : defaultXZDrag;
         }
+    }
+
+    public static Walrus Instance;
+
+    void OnEnable(){
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+        Instance = this;
     }
 
     void Update(){
@@ -78,10 +91,12 @@ public class Walrus : Entity
         }
     }
 
-
+    Vector3 previousVelocity;
     protected override void FixedUpdate(){
         base.FixedUpdate();
         HandleInputFixed();
+        previousVelocity = rb.velocity;
+        Debug.Log(rb.velocity.magnitude);
     }
 
     Vector2 currentWalkVector;
@@ -100,6 +115,7 @@ public class Walrus : Entity
         }
         
         if (rushing){
+            
             rb.velocity = Vector3.Lerp(rb.velocity, transform.forward * rb.velocity.magnitude, rushForceLerp * Time.fixedDeltaTime);
         }
         else{
@@ -115,9 +131,19 @@ public class Walrus : Entity
         if (unsignedAngle > 5){
 
             currentRotateForce = Mathf.Min(currentRotateForce + currentRotateIncreaseRate * Time.fixedDeltaTime, currentMaxRotateSpeed);
+            if (rushing){
+                float rotateForceMultiplier = Mathf.Lerp(0, 1, rb.velocity.magnitude / rushRotationControlVelocityCap);
+                currentRotateForce *= rotateForceMultiplier;
+            }
             rb.AddTorque(Vector3.up * Mathf.Sign(angle) * currentRotateForce);
         }
 
         rb.angularDrag = Mathf.Lerp(currentMaxAngularDrag, currentMinAngularDrag, unsignedAngle / 180);
+    }
+
+    void OnCollisionEnter(Collision coll){
+        if (coll.gameObject.tag == "Wall"){
+            rb.velocity = Vector3.Reflect(previousVelocity, coll.GetContact(0).normal);
+        }
     }
 }
