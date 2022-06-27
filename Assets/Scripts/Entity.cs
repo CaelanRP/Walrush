@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class Entity : MonoBehaviour
 {
@@ -9,8 +10,15 @@ public class Entity : MonoBehaviour
     void Awake(){
         rb = GetComponent<Rigidbody>();
     }
-
+    [BoxGroup("Movement Physics")]
     public float defaultXZDrag;
+
+    public virtual float XZDrag{
+        get{
+            return defaultXZDrag;
+        }
+    }
+    [BoxGroup("Movement Physics")]
     public float defaultGravityMultiplier = 1;
 
     protected virtual void FixedUpdate(){
@@ -19,8 +27,8 @@ public class Entity : MonoBehaviour
     }
 
     protected virtual void UpdateDrag(){
-        Vector3 XZdrag = Util.ZeroY(rb.velocity) * -defaultXZDrag;
-        rb.AddForce(XZdrag);
+        Vector3 drag = Util.ZeroY(rb.velocity) * -XZDrag;
+        rb.AddForce(drag);
     }
 
     protected virtual void UpdateGravity(){
