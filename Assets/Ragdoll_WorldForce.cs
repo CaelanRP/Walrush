@@ -17,6 +17,10 @@ public class Ragdoll_WorldForce : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (rag.data.dead)
+            return;
+
+
         if(rag.data.isGrounded)
             rig.AddForce(worldForce, ForceMode.Acceleration);
     }

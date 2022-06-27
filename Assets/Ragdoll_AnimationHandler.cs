@@ -23,6 +23,9 @@ public class Ragdoll_AnimationHandler : MonoBehaviour
 
     void Update()
     {
-        animator.SetFloat("Speed", rag.refs.torso.velocity.magnitude);
+
+        Vector3 vel = rag.refs.torso.velocity;
+        vel.y = 0;
+        animator.SetFloat("Speed", vel.magnitude, .2f, Time.deltaTime);
     }
 }

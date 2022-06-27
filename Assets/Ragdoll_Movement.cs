@@ -7,6 +7,8 @@ public class Ragdoll_Movement : MonoBehaviour
 
     [Sirenix.OdinInspector.FoldoutGroup("Movement")]
     public float movementForce;
+    [Sirenix.OdinInspector.FoldoutGroup("Movement")]
+    public float rotationForce;
 
     [Sirenix.OdinInspector.FoldoutGroup("Gravity")]
     public float gravity = 20;
@@ -31,23 +33,41 @@ public class Ragdoll_Movement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (ragdoll.data.dead)
+            return;
+
+
         Gravity();
 
         if (ragdoll.data.isGrounded)
         {
-            Move();
             Standing();
         }
 
+        Move();
         Drag();
 
     }
 
+
     public void Move()
     {
+        /*
+        Vector3 forw = ragdoll.refs.torso.transform.forward;
+        forw.y = 0;
+        Vector3 delta = Vector3.Cross(forw, ragdoll.data.movementDirection).normalized * Vector3.Angle(forw, ragdoll.data.movementDirection);
+        ragdoll.refs.torso.AddTorque(delta * rotationForce, ForceMode.Acceleration);
+        ragdoll.refs.hip.AddTorque(delta * rotationForce, ForceMode.Acceleration);
+        */
+
+        if(ragdoll.data.movementDirection.magnitude > 0.2f)
+            ragdoll.refs.anim.transform.rotation = Quaternion.Lerp(ragdoll.refs.anim.transform.rotation, Quaternion.LookRotation(ragdoll.data.movementDirection), Time.fixedDeltaTime * 25f);
+
+
         for (int i = 0; i < ragdoll.refs.rigs.Length; i++)
         {
             ragdoll.refs.rigs[i].AddForce(ragdoll.data.movementDirection * movementForce, ForceMode.Acceleration);
+
         }
     }
 

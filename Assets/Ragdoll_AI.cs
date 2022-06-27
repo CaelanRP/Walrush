@@ -15,12 +15,16 @@ public class Ragdoll_AI : MonoBehaviour
 
     void Update()
     {
+        if (rag.data.dead)
+            return;
+
+
         rag.data.target = targetTransform;
         rag.data.targetPosition = targetTransform.position;
 
         Vector3 moveDir = targetTransform.position - rag.refs.torso.position;
         moveDir.y = 0;
-        moveDir = moveDir.normalized;
+        moveDir = Vector3.ClampMagnitude(moveDir * 0.5f, 1);
 
         rag.data.movementDirection = moveDir;
     }
