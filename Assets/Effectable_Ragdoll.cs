@@ -47,7 +47,12 @@ public class Effectable_Ragdoll : Effectable
 
         ragdoll.data.dead = true;
 
-        Gamefeel.instance.AddTremble(0.2f, 0.2f);
+        Invoke("Tremble", 0.2f);
+    }
+
+    void Tremble()
+    {
+        Gamefeel.instance.AddTremble(0.2f, 0.1f);
         Gamefeel.instance.AddRotationShake_World((ragdoll.refs.torso.GetComponent<Rigidbody>().velocity).normalized * 25, transform.position);
     }
 }
