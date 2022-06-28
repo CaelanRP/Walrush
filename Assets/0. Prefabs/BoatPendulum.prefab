@@ -82,6 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotation: {fileID: 2955116610608049759}
   position: {fileID: 1244819427790332458}
+  boatDipRange: 30
 --- !u!1 &2955116611518277708
 GameObject:
   m_ObjectHideFlags: 0

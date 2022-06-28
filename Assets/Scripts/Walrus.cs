@@ -99,12 +99,15 @@ public class Walrus : Entity
 
     void Gore(){
         BoatRotator.Instance.Slam(goreSlamBoatTip, goreSlamBoatDip, transform.position);
+        Gamefeel.instance.AddTremble(20, 0.5f);
     }
 
     void StartRush(){
         rushing = true;
         rb.AddForce(transform.forward * initialRushForce, ForceMode.Impulse);
         BoatRotator.Instance.Slam(rushBoatTip, rushBoatDip, transform.position);
+
+        Gamefeel.instance.AddTremble(2, 0.5f);
 
         UpdateDragValue();
     }
@@ -123,7 +126,7 @@ public class Walrus : Entity
         UpdateDragValue();
 
         previousVelocity = rb.velocity;
-        Debug.Log(rb.velocity.magnitude);
+        //Debug.Log(rb.velocity.magnitude);
 
         if (transform.eulerAngles.z != 0){
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);

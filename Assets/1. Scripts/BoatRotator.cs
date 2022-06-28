@@ -7,22 +7,40 @@ public class BoatRotator : MonoBehaviour
 {
     public RotationSpring rotation;
     public PositionSpring position;
-    public float boatDipRange = 20;
+    public float boatSizeX, boatSizeZ;
+    public float slidyForceMultiplier;
+
+    [HideInInspector]
+    public Vector3 currentSlidyVector;
     // Start is called before the first frame update
     public void Slam(float rotationAmt, float positionAmt, Vector3 position){
-        rotation.AddForce_World(Vector3.up * rotationAmt, position);
-        this.position.AddForce(Vector3.up * positionAmt, position, boatDipRange);
+        rotation.AddForce_World(Vector3.up * rotationAmt, position, boatSizeX, boatSizeZ);
+        this.position.AddForce(Vector3.up * positionAmt, position, boatSizeX * 2, boatSizeZ * 2);
+
+        TriggerBoatDipped(positionAmt, position);
     }
     
-    public static BoatRotator Instance;
+    private static BoatRotator _I;
+    public static BoatRotator Instance{
+        get{
+            if (!_I){
+                _I = FindObjectOfType<BoatRotator>();
+            }
+            return _I;
+        }
+    }
 
     void OnEnable(){
-        if (Instance != null && Instance != this)
+        if (_I != null && _I != this)
         {
             Destroy(this);
             return;
         }
-        Instance = this;
+        _I = this;
+    }
+
+    void FixedUpdate(){
+        UpdateSlidyForce();
     }
 
 
@@ -39,5 +57,9 @@ public class BoatRotator : MonoBehaviour
                 Debug.LogError(ex);
             }
         }
+    }
+
+    void UpdateSlidyForce(){
+        currentSlidyVector = ((Vector3.down) - (-transform.up)) * slidyForceMultiplier;
     }
 }

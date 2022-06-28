@@ -27,12 +27,15 @@ public class CameraController : MonoBehaviour
     Vector3 target;
     void LateUpdate()
     {
+
         target.x = Walrus.Instance.transform.position.x;
         target.z = Walrus.Instance.transform.position.z;
 
-        float x = Mathf.Lerp(transform.position.x, target.x, horizontalLerpRate * Time.deltaTime);
-        float z = Mathf.Lerp(transform.position.z, target.z, depthLerpRate * Time.deltaTime);
-        transform.position = new Vector3(x,transform.position.y, z);
+        Vector3 posToLocal = transform.InverseTransformVector(target);
+        float x = Mathf.Lerp(transform.localPosition.x, posToLocal.x, horizontalLerpRate * Time.deltaTime);
+        float z = Mathf.Lerp(transform.localPosition.z, posToLocal.z, depthLerpRate * Time.deltaTime);
+
+        transform.localPosition = new Vector3(x,transform.localPosition.y, z);
     }
 
     public Vector3 currentDown{

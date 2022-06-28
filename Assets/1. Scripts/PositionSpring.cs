@@ -29,22 +29,21 @@ public class PositionSpring : MonoBehaviour
 
     internal void AddForce(Vector3 force)
     {
-        vel += force * m;
+        vel += force;
     }
 
-    internal void AddForce(Vector3 force, Vector3 pos, float range = 0)
+    internal void AddForce(Vector3 force, Vector3 pos, float rangeX, float rangeZ)
     {
         float m = 1f;
 
-        if (range != 0)
-        {
+        float xDistRatio = Mathf.Abs(pos.x - transform.position.x) / rangeX;
+        float zDistRatio = Mathf.Abs(pos.z - transform.position.z) / rangeZ;
+        Debug.Log("x ratio: " + xDistRatio + " z ratio: " + zDistRatio);
+        float ratio = Mathf.Max(xDistRatio, zDistRatio); // Choose the higher ratio distance, effectively lowering dip if we are far from the center on either axis
+
             float dist = Vector3.Distance(pos, transform.position);
 
-            if (dist > range)
-                return;
-
-            m = Mathf.Clamp((1f - (dist / range)), 0f, 1f);
-        }
+            m = Mathf.Clamp((1f - ratio), 0f, 1f);
 
         vel += force * m;
     }
