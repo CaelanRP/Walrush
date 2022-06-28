@@ -17,6 +17,10 @@ public class Walrus : Entity
     public float minBounceVelocity;
     [BoxGroup("Additional Stats")][TitleGroup("Additional Stats/Boat Dip")]
     public float goreSlamBoatDip, goreSlamBoatTip, rushBoatDip, rushBoatTip;
+    [BoxGroup("Combat")]
+    public float minDamageSpeed, defaultDamageForce, damageForceMultiplier;
+    [BoxGroup("Combat")]
+    public KillBall killBall;
     float currentRotateForce;
 
     public float currentMinRotateSpeed{ get{ return rushing ? minRotateSpeedRush : minRotateSpeed; } }
@@ -31,7 +35,11 @@ public class Walrus : Entity
     Rewired.Player _i;
 
     bool rushing;
-    
+
+
+    [TitleGroup("VFX")]
+    public ParticleSystem[] vfx;
+
     public Rewired.Player input{
         get{
             if (_i == null){
@@ -68,6 +76,10 @@ public class Walrus : Entity
     void Update(){
         HandleInput();
         UpdateAnimationValues();
+
+        UpdateDamageBall();
+
+        vfx[0].transform.forward = -(new Vector3(rb.velocity.x, 0 , rb.velocity.z));
     }
 
     void HandleInput(){
@@ -99,12 +111,17 @@ public class Walrus : Entity
 
     void Gore(){
         BoatRotator.Instance.Slam(goreSlamBoatTip, goreSlamBoatDip, transform.position);
+        Gamefeel.instance.AddTremble(.2f, 0.2f);
     }
 
     void StartRush(){
         rushing = true;
         rb.AddForce(transform.forward * initialRushForce, ForceMode.Impulse);
         BoatRotator.Instance.Slam(rushBoatTip, rushBoatDip, transform.position);
+        vfx[0].Play();
+
+        Gamefeel.instance.AddTremble(.2f, 0.2f);
+        Gamefeel.instance.AddRotationShake_World(transform.forward * 250, transform.position);
 
         UpdateDragValue();
     }
@@ -123,11 +140,13 @@ public class Walrus : Entity
         UpdateDragValue();
 
         previousVelocity = rb.velocity;
-        Debug.Log(rb.velocity.magnitude);
+        //Debug.Log(rb.velocity.magnitude);
 
         if (transform.eulerAngles.z != 0){
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
         }
+
+        
     }
 
     Vector2 currentWalkVector;
@@ -136,6 +155,8 @@ public class Walrus : Entity
         currentWalkVector = input.GetAxis2D("MoveX", "MoveY");
         
         cameraRelativeMoveVector = CameraController.Instance.transform.TransformVector(new Vector3(currentWalkVector.x, 0, currentWalkVector.y));
+
+        animator.SetFloat("xJoystick", currentWalkVector.x, 0.25f, Time.fixedDeltaTime);
 
         if (Time.time - lastBounced > 0.1f){
             if (currentWalkVector.magnitude > 0.1f){
@@ -153,7 +174,7 @@ public class Walrus : Entity
                 rb.AddForce(cameraRelativeMoveVector * rushForce * Time.fixedDeltaTime);
                 //rb.velocity = Vector3.Lerp(rb.velocity, transform.forward * rb.velocity.magnitude, rushForceLerp * Time.fixedDeltaTime);
             }
-            else{
+            else if (canWaddle){
                 rb.AddForce(transform.forward * currentWalkVector.magnitude * waddleSpeed);
             }
         }
@@ -161,9 +182,15 @@ public class Walrus : Entity
     }
 
     public void Step(){
-        if (!rushing)
+        if (!rushing && canWaddle)
         {
             rb.AddForce(transform.forward * currentWalkVector.magnitude * waddleStepSpeed * animator.GetFloat("walking"), ForceMode.Impulse);
+        }
+    }
+
+    bool canWaddle{
+        get{
+            return !rushing && currentDrag == defaultXZDrag;
         }
     }
 
@@ -220,8 +247,14 @@ public class Walrus : Entity
         }
         else
         {
-            currentDrag = Mathf.MoveTowards(currentDrag, defaultXZDrag, 5000 * Time.fixedDeltaTime);
+            currentDrag = Mathf.MoveTowards(currentDrag, defaultXZDrag, 8000 * Time.fixedDeltaTime);
         }
+    }
+
+    void UpdateDamageBall(){
+        killBall.gameObject.SetActive(rb.velocity.magnitude >= minDamageSpeed);
+        killBall.force = defaultDamageForce + (damageForceMultiplier * rb.velocity.magnitude);
+
     }
 
     void UpdateAnimationValues(){

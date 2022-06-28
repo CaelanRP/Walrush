@@ -59,18 +59,15 @@ public class RotationSpringInstance
     }
 
 
-    internal void AddForce_World(Transform transform, Vector3 force, Vector3 pos, float range = 0)
+    internal void AddForce_World(Transform transform, Vector3 force, Vector3 pos, float planeSizeX = 0, float planeSizeZ = 0)
     {
         float m = 1f;
 
-        if (range != 0)
-        {
-            float dist = Vector3.Distance(pos, transform.position);
-
-            if (dist > range)
-                return;
-
-            m = Mathf.Clamp((1f - (dist / range)), 0f, 1f);
+        if (planeSizeX != 0 && planeSizeZ != 0){
+            float xDistRatio = Mathf.Abs(pos.x - transform.position.x) / planeSizeX;
+            float zDistRatio = Mathf.Abs(pos.z - transform.position.z) / planeSizeZ;
+            float ratio = Mathf.Max(xDistRatio, zDistRatio);
+            m = Mathf.Clamp(ratio, 0f, 1f);
         }
 
         Vector3 toObj = transform.position - pos;
@@ -132,9 +129,9 @@ public class RotationSpring : MonoBehaviour
     }
 
 
-    internal void AddForce_World(Vector3 force, Vector3 pos, float range = 0)
+    internal void AddForce_World(Vector3 force, Vector3 pos, float planeSizeX = 0, float planeSizeZ = 0)
     {
-        rotationSpringInstance.AddForce_World(transform, force, pos, range);
+        rotationSpringInstance.AddForce_World(transform, force, pos, planeSizeX, planeSizeZ);
     }
 
     internal void AddForce_WorldCamera(Vector3 force, Vector3 pos, float range = 0)

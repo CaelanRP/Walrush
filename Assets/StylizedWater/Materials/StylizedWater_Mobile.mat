@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: StylizedWater_Mobile
   m_Shader: {fileID: 4800000, guid: 4bcc0b68579a5c740ad31644411ffb54, type: 3}
-  m_ShaderKeywords: _LIGHTING_ON _USEINTERSECTIONFOAM_ON _WORLDSPACETILIBG_ON
+  m_ShaderKeywords: _ENABLE_VC_ON _LIGHTING_ON _USEINTERSECTIONFOAM_ON _WORLDSPACETILIBG_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -32,7 +32,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normals:
-        m_Texture: {fileID: 2800000, guid: 3a41e7c7976846a47a62be3520f418ed, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6a4951be050ccf74380a80c3b9814cbf, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Reflection:
@@ -62,8 +62,9 @@ Material:
     - _DistanceFade: 300
     - _ENABLE_GRADIENT: 0
     - _ENABLE_SHADOWS: 0
-    - _ENABLE_VC: 0
+    - _ENABLE_VC: 1
     - _EdgeFade: 0.5
+    - _Float3: 2
     - _FoamDistortion: 0.45
     - _FoamOpacity: 0
     - _FoamSize: 0
@@ -105,9 +106,9 @@ Material:
     - _UseIntersectionFoam: 1
     - _UseIntersectionHighlight: 0
     - _WaveFoam: 0
-    - _WaveHeight: 0.011
-    - _WaveSize: 0.1
-    - _Wavesspeed: 1.95
+    - _WaveHeight: 1
+    - _WaveSize: 0.31
+    - _Wavesspeed: 3.06
     - _Wavesstrength: 0.031
     - _Wavetint: 0
     - _Worldspacetiling: 0

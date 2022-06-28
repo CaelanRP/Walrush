@@ -26,8 +26,8 @@ MonoBehaviour:
     overrideState: 1
     value: {r: 0.013305449, g: 0.032906022, b: 0.122641504, a: 1}
   ambientOnly:
-    overrideState: 1
-    value: 1
+    overrideState: 0
+    value: 0
   noiseFilterTolerance:
     overrideState: 1
     value: 0

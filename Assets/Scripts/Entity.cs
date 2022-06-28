@@ -36,7 +36,7 @@ public class Entity : MonoBehaviour
     }
 
     protected virtual void UpdateGravity(){
-        Vector3 gravity = CameraController.Instance.currentDown * defaultGravityMultiplier * 9.8f * rb.mass;
+        Vector3 gravity = CameraController.Instance.currentDown * defaultGravityMultiplier * 19.6f * rb.mass;
         rb.AddForce(gravity);
     }
 }
