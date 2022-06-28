@@ -8,9 +8,14 @@ public class Ragdoll_AI : MonoBehaviour
     public Transform targetTransform;
     Ragdoll rag;
 
+    Transform target;
+    Walrus walrus;
+    public float aggroRange = 15f;
+
     void Start()
     {
         rag = GetComponent<Ragdoll>();
+        walrus = Walrus.Instance;
     }
 
     void Update()
@@ -18,8 +23,19 @@ public class Ragdoll_AI : MonoBehaviour
         if (rag.data.dead)
             return;
 
+        if(target)
+        {
+            rag.data.target = target;
+            return;
+        }
 
-        rag.data.target = targetTransform;
+
+        if(Vector3.Distance(transform.position, walrus.transform.position) < aggroRange)
+        {
+            target = walrus.transform;
+        }
+
+
         rag.data.targetPosition = targetTransform.position;
 
         Vector3 moveDir = targetTransform.position - rag.refs.torso.position;

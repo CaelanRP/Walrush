@@ -48,8 +48,8 @@ public class Effectable_Breakable : Effectable
             rigs[i].AddForce(forceAdded * .3f, ForceMode.Impulse);
         }
 
-        Gamefeel.instance.AddTremble(0.2f, 0.2f);
-        Gamefeel.instance.AddRotationShake_World((forceAdded).normalized * 25, transform.position);
+        Gamefeel.instance.AddTremble(0.2f, 0.1f);
+        Gamefeel.instance.AddRotationShake_World((forceAdded).normalized * 50, transform.position);
 
     }
 
