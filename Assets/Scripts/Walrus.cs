@@ -31,7 +31,11 @@ public class Walrus : Entity
     Rewired.Player _i;
 
     bool rushing;
-    
+
+
+    [TitleGroup("VFX")]
+    public ParticleSystem[] vfx;
+
     public Rewired.Player input{
         get{
             if (_i == null){
@@ -105,7 +109,7 @@ public class Walrus : Entity
         rushing = true;
         rb.AddForce(transform.forward * initialRushForce, ForceMode.Impulse);
         BoatRotator.Instance.Slam(rushBoatTip, rushBoatDip, transform.position);
-
+        vfx[0].Play();
         UpdateDragValue();
     }
 
@@ -136,6 +140,8 @@ public class Walrus : Entity
         currentWalkVector = input.GetAxis2D("MoveX", "MoveY");
         
         cameraRelativeMoveVector = CameraController.Instance.transform.TransformVector(new Vector3(currentWalkVector.x, 0, currentWalkVector.y));
+
+        animator.SetFloat("xJoystick", currentWalkVector.x, 0.25f, Time.fixedDeltaTime);
 
         if (Time.time - lastBounced > 0.1f){
             if (currentWalkVector.magnitude > 0.1f){
