@@ -18,7 +18,7 @@ public class Effectable_Ragdoll : Effectable
     {
         if(Input.GetKeyDown(KeyCode.K))
         {
-            TakeDamage(101);
+            TakeDamage(101, Vector3.zero);
             AddForce(UnityEngine.Random.onUnitSphere * 1000);
         }
     }
@@ -29,7 +29,7 @@ public class Effectable_Ragdoll : Effectable
         ragdoll.refs.torso.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
     }
 
-    public override void TakeDamage(float damage)
+    public override void TakeDamage(float damage, Vector3 dir)
     {
         ragdoll.data.currentHp -= damage;
 

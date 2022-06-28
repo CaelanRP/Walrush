@@ -18,7 +18,7 @@ public class Effectable_Breakable : Effectable
         rig = GetComponent<Rigidbody>();
     }
 
-    public override void TakeDamage(float damage)
+    public override void TakeDamage(float damage, Vector3 dir)
     {
         health -= damage;
 
@@ -48,8 +48,8 @@ public class Effectable_Breakable : Effectable
             rigs[i].AddForce(forceAdded * .3f, ForceMode.Impulse);
         }
 
-        Gamefeel.instance.AddTremble(0.2f, 0.1f);
-        Gamefeel.instance.AddRotationShake_World((forceAdded).normalized * 50, transform.position);
+        Gamefeel.instance.AddTremble(0.05f, 0.1f);
+        Gamefeel.instance.AddRotationShake_World((forceAdded).normalized * 30, transform.position);
 
     }
 

@@ -40,6 +40,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4147976931018838624}
     m_Modifications:
+    - target: {fileID: 1414106952941003758, guid: c0475ef57976a434b93a9de3cc7665f8, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0.01571326
+      objectReference: {fileID: 0}
+    - target: {fileID: 2055723720243817737, guid: c0475ef57976a434b93a9de3cc7665f8, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3870120603993259277, guid: c0475ef57976a434b93a9de3cc7665f8, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -84,9 +92,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4260846605187318444, guid: c0475ef57976a434b93a9de3cc7665f8, type: 3}
+      propertyPath: m_Mass
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6298943534214496425, guid: c0475ef57976a434b93a9de3cc7665f8, type: 3}
       propertyPath: m_Name
       value: P_Table_Cloth
+      objectReference: {fileID: 0}
+    - target: {fileID: 6391287205267487297, guid: c0475ef57976a434b93a9de3cc7665f8, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0475ef57976a434b93a9de3cc7665f8, type: 3}
@@ -102,6 +118,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4147976931018838624}
     m_Modifications:
+    - target: {fileID: 5228123747301131140, guid: f2cba0cb8eeebab42a2e1c8f4d18f3b9, type: 3}
+      propertyPath: m_Mass
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6000261680842196519, guid: f2cba0cb8eeebab42a2e1c8f4d18f3b9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -211,6 +231,10 @@ PrefabInstance:
     - target: {fileID: 2931129531098088729, guid: 0f2b0e5f40a982b44a47c9c6bea6ad20, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703724895290884282, guid: 0f2b0e5f40a982b44a47c9c6bea6ad20, type: 3}
+      propertyPath: m_Mass
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f2b0e5f40a982b44a47c9c6bea6ad20, type: 3}

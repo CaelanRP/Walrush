@@ -160,7 +160,7 @@ public class Projectile : MonoBehaviour
     {
         if(target)
         {
-            target.TakeDamage(damage);
+            target.TakeDamage(damage, transform.forward);
             target.AddForce(knockback * transform.forward);
         }
 
