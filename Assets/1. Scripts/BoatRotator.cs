@@ -10,6 +10,8 @@ public class BoatRotator : MonoBehaviour
     public float boatSizeX, boatSizeZ;
     public float slidyForceMultiplier;
 
+    public float minSlidyForceAngle;
+
     [HideInInspector]
     public Vector3 currentSlidyVector;
     // Start is called before the first frame update
@@ -60,6 +62,12 @@ public class BoatRotator : MonoBehaviour
     }
 
     void UpdateSlidyForce(){
-        currentSlidyVector = ((Vector3.down) - (-transform.up)) * slidyForceMultiplier;
+        var angle = Vector3.Angle(Vector3.down, -transform.up);
+        if (angle > minSlidyForceAngle){
+            currentSlidyVector = ((Vector3.down) - (-transform.up)) * slidyForceMultiplier;
+        }
+        else{
+            currentSlidyVector = Vector3.zero;
+        }
     }
 }

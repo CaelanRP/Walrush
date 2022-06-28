@@ -82,9 +82,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotation: {fileID: 2955116610608049759}
   position: {fileID: 1244819427790332458}
-  boatSizeX: 0
-  boatSizeZ: 0
-  slidyForceMultiplier: 0
+  boatSizeX: 20
+  boatSizeZ: 10
+  slidyForceMultiplier: 30000
   currentSlidyVector: {x: 0, y: 0, z: 0}
 --- !u!1 &2955116611518277708
 GameObject:
@@ -514,14 +514,6 @@ PrefabInstance:
       propertyPath: rotationSpringInstance.minDampVelocity
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 9049683820528619345, guid: 8284f5f3ddddfd64bb4b82a2d2fd43f6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.76
-      objectReference: {fileID: 0}
-    - target: {fileID: 9049683820528619345, guid: 8284f5f3ddddfd64bb4b82a2d2fd43f6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -11.04
-      objectReference: {fileID: 0}
     - target: {fileID: 9049683821380842352, guid: 8284f5f3ddddfd64bb4b82a2d2fd43f6, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -574,7 +566,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7105376938445099489, guid: 8284f5f3ddddfd64bb4b82a2d2fd43f6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8284f5f3ddddfd64bb4b82a2d2fd43f6, type: 3}
 --- !u!4 &2955116611635732861 stripped
 Transform:

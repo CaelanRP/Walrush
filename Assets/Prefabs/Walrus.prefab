@@ -5060,6 +5060,10 @@ MonoBehaviour:
   goreSlamBoatTip: 18
   rushBoatDip: 3
   rushBoatTip: 6
+  minDamageSpeed: 0
+  defaultDamageForce: 0
+  damageForceMultiplier: 0
+  killBall: {fileID: 0}
   vfx:
   - {fileID: 2809109382529393787}
 --- !u!1 &8680405210510269291
@@ -5371,7 +5375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6344879361650351097, guid: 34ee26902defb0c469c101e3b4dd1d80, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.42
+      value: -0.35
       objectReference: {fileID: 0}
     - target: {fileID: 6344879361650351097, guid: 34ee26902defb0c469c101e3b4dd1d80, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5410,6 +5414,11 @@ PrefabInstance:
 --- !u!1 &4059389174665093966 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6000583081722904899, guid: 34ee26902defb0c469c101e3b4dd1d80, type: 3}
+  m_PrefabInstance: {fileID: 7715654035699311117}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3683390749254810100 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6344879361650351097, guid: 34ee26902defb0c469c101e3b4dd1d80, type: 3}
   m_PrefabInstance: {fileID: 7715654035699311117}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &947839946685447099 stripped
@@ -5480,11 +5489,6 @@ Transform:
 --- !u!4 &2636108105957043383 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5730500862840819386, guid: 34ee26902defb0c469c101e3b4dd1d80, type: 3}
-  m_PrefabInstance: {fileID: 7715654035699311117}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &3683390749254810100 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6344879361650351097, guid: 34ee26902defb0c469c101e3b4dd1d80, type: 3}
   m_PrefabInstance: {fileID: 7715654035699311117}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &7173358610983059580
@@ -5732,3 +5736,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walrus: {fileID: 8680405210127125741}
+--- !u!114 &402319226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4059389174665093966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 571da9bd086662647ae8ac1beba05c18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  justEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8680405210127125741}
+        m_TargetAssemblyTypeName: Walrus, Assembly-CSharp
+        m_MethodName: StartRush
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

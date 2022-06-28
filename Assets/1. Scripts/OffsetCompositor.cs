@@ -6,6 +6,12 @@ public class OffsetCompositor : MonoBehaviour
 {
     public Transform objectParent;
     public List<Transform> objs;
+
+    public static OffsetCompositor instance;
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         for (int i = 0; i < objectParent.childCount; i++)

@@ -59,15 +59,28 @@ public class Ragdoll_Movement : MonoBehaviour
         ragdoll.refs.torso.AddTorque(delta * rotationForce, ForceMode.Acceleration);
         ragdoll.refs.hip.AddTorque(delta * rotationForce, ForceMode.Acceleration);
         */
+        if(ragdoll.data.target)
+        {
+            Vector3 dir = ragdoll.data.target.position - transform.position;
+            dir.y = 0;
+            ragdoll.refs.anim.transform.rotation = Quaternion.RotateTowards(ragdoll.refs.anim.transform.rotation, Quaternion.LookRotation(dir), Time.fixedDeltaTime * 45f);
 
-        if(ragdoll.data.movementDirection.magnitude > 0.2f)
+        }
+        else if(ragdoll.data.movementDirection.magnitude > 0.2f)
             ragdoll.refs.anim.transform.rotation = Quaternion.Lerp(ragdoll.refs.anim.transform.rotation, Quaternion.LookRotation(ragdoll.data.movementDirection), Time.fixedDeltaTime * 25f);
 
 
-        for (int i = 0; i < ragdoll.refs.rigs.Length; i++)
+        if (ragdoll.data.target)
         {
-            ragdoll.refs.rigs[i].AddForce(ragdoll.data.movementDirection * movementForce, ForceMode.Acceleration);
 
+        }
+        else
+        {
+            for (int i = 0; i < ragdoll.refs.rigs.Length; i++)
+            {
+                ragdoll.refs.rigs[i].AddForce(ragdoll.data.movementDirection * movementForce, ForceMode.Acceleration);
+
+            }
         }
     }
 

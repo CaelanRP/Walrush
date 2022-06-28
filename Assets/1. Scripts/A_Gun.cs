@@ -27,8 +27,8 @@ public class A_Gun : MonoBehaviour
         void Fire()
         {
 
-            Transform target = null;
-            GameObject spawned = Instantiate(projectileToSpawn, transform.position, Quaternion.LookRotation(target.transform.position - transform.position));
+            Transform target = GetComponentInParent<Ragdoll>().data.target.transform;
+            GameObject spawned = Instantiate(projectileToSpawn, transform.position, Quaternion.LookRotation(transform.forward));
 
             spawned.transform.Rotate(UnityEngine.Random.insideUnitSphere);
 

@@ -23,7 +23,8 @@ public class Gamefeel : MonoBehaviour
             if(effect.timing > 0)
                 yield return new WaitForSeconds(effect.timing);
 
-            if (effect.effectType == GameFeelEffect.EffectType.Shake_World)
+
+            if (effect.effectType == GameFeelEffect.EffectType.ShakeForward)
                 AddRotationShake_World(direction * effect.worldShakeAmount, pos, effect.worldShakeRange);
 
 
@@ -90,10 +91,11 @@ public class GameFeelEffect
 {
     public enum EffectType
     {
-        Shake_World,
+        ShakeForward,
         Tremble,
         ObjectEnabler,
         UnityEvent
+        
     }
     [Sirenix.OdinInspector.FoldoutGroup("$timing")]
     public EffectType effectType;
@@ -102,10 +104,10 @@ public class GameFeelEffect
     public float timing = 0;
 
 
-    [Sirenix.OdinInspector.ShowIf("$effectType", EffectType.Shake_World)]
+    [Sirenix.OdinInspector.ShowIf("$effectType", EffectType.ShakeForward)]
     [Sirenix.OdinInspector.FoldoutGroup("$timing")]
     public float worldShakeAmount = 1f;
-    [Sirenix.OdinInspector.ShowIf("$effectType", EffectType.Shake_World)]
+    [Sirenix.OdinInspector.ShowIf("$effectType", EffectType.ShakeForward)]
     [Sirenix.OdinInspector.FoldoutGroup("$timing")]
     public float worldShakeRange = 100f;
 
