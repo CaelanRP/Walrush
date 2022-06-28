@@ -18,7 +18,9 @@ public class Walrus : Entity
     [BoxGroup("Additional Stats")][TitleGroup("Additional Stats/Boat Dip")]
     public float goreSlamBoatDip, goreSlamBoatTip, rushBoatDip, rushBoatTip;
     [BoxGroup("Combat")]
-    public float minDamageSpeed;
+    public float minDamageSpeed, defaultDamageForce, damageForceMultiplier;
+    [BoxGroup("Combat")]
+    public KillBall killBall;
     float currentRotateForce;
 
     public float currentMinRotateSpeed{ get{ return rushing ? minRotateSpeedRush : minRotateSpeed; } }
@@ -74,6 +76,8 @@ public class Walrus : Entity
     void Update(){
         HandleInput();
         UpdateAnimationValues();
+
+        UpdateDamageBall();
 
         vfx[0].transform.forward = -(new Vector3(rb.velocity.x, 0 , rb.velocity.z));
     }
@@ -141,6 +145,8 @@ public class Walrus : Entity
         if (transform.eulerAngles.z != 0){
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
         }
+
+        
     }
 
     Vector2 currentWalkVector;
@@ -168,7 +174,7 @@ public class Walrus : Entity
                 rb.AddForce(cameraRelativeMoveVector * rushForce * Time.fixedDeltaTime);
                 //rb.velocity = Vector3.Lerp(rb.velocity, transform.forward * rb.velocity.magnitude, rushForceLerp * Time.fixedDeltaTime);
             }
-            else{
+            else if (canWaddle){
                 rb.AddForce(transform.forward * currentWalkVector.magnitude * waddleSpeed);
             }
         }
@@ -176,9 +182,15 @@ public class Walrus : Entity
     }
 
     public void Step(){
-        if (!rushing)
+        if (!rushing && canWaddle)
         {
             rb.AddForce(transform.forward * currentWalkVector.magnitude * waddleStepSpeed * animator.GetFloat("walking"), ForceMode.Impulse);
+        }
+    }
+
+    bool canWaddle{
+        get{
+            return !rushing && currentDrag == defaultXZDrag;
         }
     }
 
@@ -237,6 +249,12 @@ public class Walrus : Entity
         {
             currentDrag = Mathf.MoveTowards(currentDrag, defaultXZDrag, 8000 * Time.fixedDeltaTime);
         }
+    }
+
+    void UpdateDamageBall(){
+        killBall.gameObject.SetActive(rb.velocity.magnitude >= minDamageSpeed);
+        killBall.force = defaultDamageForce + (damageForceMultiplier * rb.velocity.magnitude);
+
     }
 
     void UpdateAnimationValues(){
