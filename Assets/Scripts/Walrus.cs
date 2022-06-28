@@ -72,6 +72,8 @@ public class Walrus : Entity
     void Update(){
         HandleInput();
         UpdateAnimationValues();
+
+        vfx[0].transform.forward = -(new Vector3(rb.velocity.x, 0 , rb.velocity.z));
     }
 
     void HandleInput(){
