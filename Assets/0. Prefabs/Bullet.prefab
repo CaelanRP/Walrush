@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 7804549888644407295}
   - component: {fileID: 7182181472177317119}
   - component: {fileID: 2783504068940857583}
+  - component: {fileID: 8754250448375883898}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -127,8 +128,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12499e7e68f5ee40a41a9d7f5ee02ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8754250448375883898}
+        m_TargetAssemblyTypeName: AddGamefeel, Assembly-CSharp
+        m_MethodName: Go
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   localForce: {x: 0, y: 0, z: 100}
-  worldForce: {x: 0, y: 7, z: 0}
+  worldForce: {x: 0, y: 0, z: 0}
   gravity: 20
   destroyOnHit: 1
   bounces: 0
@@ -174,6 +190,33 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   shrinkTime: 0.3
+--- !u!114 &8754250448375883898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429527622249667014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75c337e1512c5ea4d844331d3e8c4033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effects:
+  - effectType: 0
+    timing: 0
+    worldShakeAmount: -35
+    worldShakeRange: 25
+    trembleAmount: 1
+    trembleDuration: 0.1
+    trembleRange: 100
+    objectsKey: 
+    objectsDuration: 0.1
+    objectsRange: 30
+    unityEvent:
+      m_PersistentCalls:
+        m_Calls: []
+  auto: 0
 --- !u!1 &7753045957682254507
 GameObject:
   m_ObjectHideFlags: 0

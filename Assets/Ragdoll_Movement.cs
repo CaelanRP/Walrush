@@ -61,7 +61,9 @@ public class Ragdoll_Movement : MonoBehaviour
         */
         if(ragdoll.data.target)
         {
-            ragdoll.refs.anim.transform.rotation = Quaternion.Lerp(ragdoll.refs.anim.transform.rotation, Quaternion.LookRotation(ragdoll.data.target.position - transform.position), Time.fixedDeltaTime * 25f);
+            Vector3 dir = ragdoll.data.target.position - transform.position;
+            dir.y = 0;
+            ragdoll.refs.anim.transform.rotation = Quaternion.RotateTowards(ragdoll.refs.anim.transform.rotation, Quaternion.LookRotation(dir), Time.fixedDeltaTime * 45f);
 
         }
         else if(ragdoll.data.movementDirection.magnitude > 0.2f)

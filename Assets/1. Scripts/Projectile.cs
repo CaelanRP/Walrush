@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+
+    public UnityEngine.Events.UnityEvent hitEvent;
+
     public Vector3 localForce;
 
     public Vector3 worldForce;
@@ -175,6 +178,8 @@ public class Projectile : MonoBehaviour
 
     void End(RaycastHit hit)
     {
+
+        hitEvent.Invoke();
         dieAction?.Invoke(hit);
         done = true;
 
