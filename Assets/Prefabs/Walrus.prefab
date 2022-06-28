@@ -196,7 +196,8 @@ MonoBehaviour:
   goreSlamBoatTip: 18
   rushBoatDip: 3
   rushBoatTip: 6
-  vfx: []
+  vfx:
+  - {fileID: 2809109382529393787}
 --- !u!1 &8680405210510269291
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,6 +463,11 @@ PrefabInstance:
 --- !u!4 &3910654130844258562 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4564833125915809382, guid: 6517cdba955bfd444a0b091ca8add187, type: 3}
+  m_PrefabInstance: {fileID: 656651144030259044}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2809109382529393787 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3451748139913356063, guid: 6517cdba955bfd444a0b091ca8add187, type: 3}
   m_PrefabInstance: {fileID: 656651144030259044}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7715654035699311117
