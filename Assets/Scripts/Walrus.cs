@@ -91,13 +91,15 @@ public class Walrus : Entity
     void TestRush(){
         if (rushing){
             if (!input.GetButton("Rush")){
+
                 rushing = false;
+                animator.SetBool("Lunge", false);
             }
         }
         else {
             if (canRush){
                 if (input.GetButtonDown("Rush")){
-                    StartRush();
+                    animator.SetBool("Lunge", true);
                 }
             }
         }
@@ -114,7 +116,7 @@ public class Walrus : Entity
         Gamefeel.instance.AddTremble(.2f, 0.2f);
     }
 
-    void StartRush(){
+    public void StartRush(){
         rushing = true;
         rb.AddForce(transform.forward * initialRushForce, ForceMode.Impulse);
         BoatRotator.Instance.Slam(rushBoatTip, rushBoatDip, transform.position);
