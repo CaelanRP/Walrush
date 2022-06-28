@@ -9,6 +9,7 @@ public class Entity : MonoBehaviour
 
     void Awake(){
         rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
     }
     [BoxGroup("Movement Physics")]
     public float defaultXZDrag;
@@ -20,6 +21,9 @@ public class Entity : MonoBehaviour
     }
     [BoxGroup("Movement Physics")]
     public float defaultGravityMultiplier = 1;
+
+    [Range(0,1)]
+    public float directionalGravityRatio = 1;
 
     protected virtual void FixedUpdate(){
         UpdateDrag();

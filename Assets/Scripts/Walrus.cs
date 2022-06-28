@@ -12,11 +12,11 @@ public class Walrus : Entity
     public float minRotateSpeed, maxRotateSpeed, rotateIncreaseRate, minAngularDrag, maxAngularDrag;
 
    [TitleGroup("Movement Physics/Rush")]
-   public float initialRushForce, XZDragRush, minRotateSpeedRush, maxRotateSpeedRush, rotateIncreaseRateRush, rushForceLerp, minAngularDragRush, maxAngularDragRush, rushRotationControlVelocityCap;
+   public float initialRushForce, rushAdjustForce, XZDragRush, minRotateSpeedRush, maxRotateSpeedRush, rotateIncreaseRateRush, minAngularDragRush, maxAngularDragRush, rushRotationControlVelocityCap;
     [TitleGroup("Movement Physics/Bounce")]
     public float minBounceVelocity;
-    [BoxGroup("Additional Stats")][TitleGroup("Additional Stats/Gore")]
-    public float goreSlamBoatDip, goreSlamBoatTip;
+    [BoxGroup("Additional Stats")][TitleGroup("Additional Stats/Boat Dip")]
+    public float goreSlamBoatDip, goreSlamBoatTip, rushBoatDip, rushBoatTip;
     float currentRotateForce;
 
     public float currentMinRotateSpeed{ get{ return rushing ? minRotateSpeedRush : minRotateSpeed; } }
@@ -41,9 +41,10 @@ public class Walrus : Entity
         }
     }
 
+    float currentDrag;
     public override float XZDrag{
         get{
-            return rushing ? XZDragRush : defaultXZDrag;
+            return currentDrag;
         }
     }
 
@@ -103,6 +104,9 @@ public class Walrus : Entity
     void StartRush(){
         rushing = true;
         rb.AddForce(transform.forward * initialRushForce, ForceMode.Impulse);
+        BoatRotator.Instance.Slam(rushBoatTip, rushBoatDip, transform.position);
+
+        UpdateDragValue();
     }
 
     bool canRush{
@@ -115,6 +119,9 @@ public class Walrus : Entity
     protected override void FixedUpdate(){
         base.FixedUpdate();
         HandleInputFixed();
+
+        UpdateDragValue();
+
         previousVelocity = rb.velocity;
         Debug.Log(rb.velocity.magnitude);
 
@@ -142,8 +149,9 @@ public class Walrus : Entity
             }
             
             if (rushing){
-                
-                rb.velocity = Vector3.Lerp(rb.velocity, transform.forward * rb.velocity.magnitude, rushForceLerp * Time.fixedDeltaTime);
+                float rushForce = rushAdjustForce * Mathf.Lerp(0, 1, rb.velocity.magnitude / rushRotationControlVelocityCap);
+                rb.AddForce(cameraRelativeMoveVector * rushForce * Time.fixedDeltaTime);
+                //rb.velocity = Vector3.Lerp(rb.velocity, transform.forward * rb.velocity.magnitude, rushForceLerp * Time.fixedDeltaTime);
             }
             else{
                 rb.AddForce(transform.forward * currentWalkVector.magnitude * waddleSpeed);
@@ -153,7 +161,10 @@ public class Walrus : Entity
     }
 
     public void Step(){
-        rb.AddForce(transform.forward * currentWalkVector.magnitude * waddleStepSpeed, ForceMode.Impulse);
+        if (!rushing)
+        {
+            rb.AddForce(transform.forward * currentWalkVector.magnitude * waddleStepSpeed * animator.GetFloat("walking"), ForceMode.Impulse);
+        }
     }
 
     void ApplyWalkTorque(){
@@ -164,8 +175,8 @@ public class Walrus : Entity
 
             currentRotateForce = Mathf.Min(currentRotateForce + currentRotateIncreaseRate * Time.fixedDeltaTime, currentMaxRotateSpeed);
             if (rushing){
-                float rotateForceMultiplier = Mathf.Lerp(0, 1, rb.velocity.magnitude / rushRotationControlVelocityCap);
-                currentRotateForce *= rotateForceMultiplier;
+                //float rotateForceMultiplier = Mathf.Lerp(0, 1, rb.velocity.magnitude / rushRotationControlVelocityCap);
+                //currentRotateForce *= rotateForceMultiplier;
             }
             rb.AddTorque(Vector3.up * Mathf.Sign(angle) * currentRotateForce);
             animator.SetFloat("walking", 1, 1, Time.fixedDeltaTime);
@@ -182,10 +193,10 @@ public class Walrus : Entity
             Vector3 vel = Util.ZeroY(Vector3.Reflect(previousVelocity, coll.GetContact(0).normal));
             rb.velocity = vel;
             if (rushing){
-                transform.forward = Util.ZeroY(vel);
+                //transform.forward = Util.ZeroY(vel);
                 lastBounced = Time.time;
-                StartCoroutine(SetVelocityAndRotationNextFrame(vel));
-                rb.angularVelocity = Vector3.zero;
+                //StartCoroutine(SetVelocityAndRotationNextFrame(vel));
+                //rb.angularVelocity = Vector3.zero;
             }
         }
     }
@@ -199,6 +210,18 @@ public class Walrus : Entity
 
     void UpdateGrounded(){
         
+    }
+
+    protected void UpdateDragValue()
+    {
+        if (rushing)
+        {
+            currentDrag = XZDragRush;
+        }
+        else
+        {
+            currentDrag = Mathf.MoveTowards(currentDrag, defaultXZDrag, 5000 * Time.fixedDeltaTime);
+        }
     }
 
     void UpdateAnimationValues(){

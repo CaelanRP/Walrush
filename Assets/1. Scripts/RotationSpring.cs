@@ -85,7 +85,7 @@ public class RotationSpringInstance
 
         if (range != 0)
         {
-            float dist = Vector3.Distance(pos, Camera.main.transform.position);
+            float dist = Vector3.Distance(pos, CameraController.Instance.cam.transform.position);
 
             if (dist > range)
                 return;
@@ -93,11 +93,11 @@ public class RotationSpringInstance
             m = Mathf.Clamp((1f - (dist / range)), 0f, 1f);
         }
 
-        Vector3 toCam = Camera.main.transform.position - pos;
+        Vector3 toCam = CameraController.Instance.cam.transform.position - pos;
         force = Vector3.Cross(toCam, force).normalized * force.magnitude;
 
 
-        force = Camera.main.transform.InverseTransformDirection(force);
+        force = CameraController.Instance.cam.transform.InverseTransformDirection(force);
 
         vel += force * m;
     }

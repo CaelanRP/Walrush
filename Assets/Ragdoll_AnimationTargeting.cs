@@ -13,10 +13,12 @@ public class Ragdoll_AnimationTargeting : MonoBehaviour
     public float hipDeltaForce;
     public Transform hipTarget;
     Vector3 lastHipPos;
+    Ragdoll ragdoll;
 
     private void Start()
     {
         lastHipPos = hipTarget.position;
+        ragdoll = GetComponent<Ragdoll>();
     }
 
     [System.Serializable]
@@ -29,6 +31,10 @@ public class Ragdoll_AnimationTargeting : MonoBehaviour
 
     void FixedUpdate()
     {
+
+        if (ragdoll.data.dead)
+            return;
+
         float forceM = 1;
         Vector3 hipDelta = hipTarget.position - lastHipPos;
 

@@ -12,6 +12,7 @@ public class Ragdoll : MonoBehaviour
     {
         data.ragdoll = this;
         refs.rigs = GetComponentsInChildren<Rigidbody>();
+        refs.anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -37,7 +38,7 @@ public class Ragdoll : MonoBehaviour
         public Rigidbody hip;
 
         public Rigidbody[] rigs;
-
+        internal Animator anim;
     }
 
     public Ragdoll_Data data;
@@ -69,10 +70,21 @@ public class Ragdoll : MonoBehaviour
         }
 
         bool wasGrounded = false;
+        public float currentHp = 100;
+        internal bool dead;
+
+        public float CurrentControl()
+        {
+            float c = 1;
+
+            if (dead)
+                c = 0;
+
+            return c;
+        }
 
         public void FixedUpd()
         {
-
 
             if(!wasGrounded)
             {
