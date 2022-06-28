@@ -17,6 +17,8 @@ public class Walrus : Entity
     public float minBounceVelocity;
     [BoxGroup("Additional Stats")][TitleGroup("Additional Stats/Boat Dip")]
     public float goreSlamBoatDip, goreSlamBoatTip, rushBoatDip, rushBoatTip;
+    [BoxGroup("Combat")]
+    public float minDamageSpeed;
     float currentRotateForce;
 
     public float currentMinRotateSpeed{ get{ return rushing ? minRotateSpeedRush : minRotateSpeed; } }
@@ -230,7 +232,7 @@ public class Walrus : Entity
         }
         else
         {
-            currentDrag = Mathf.MoveTowards(currentDrag, defaultXZDrag, 5000 * Time.fixedDeltaTime);
+            currentDrag = Mathf.MoveTowards(currentDrag, defaultXZDrag, 8000 * Time.fixedDeltaTime);
         }
     }
 
