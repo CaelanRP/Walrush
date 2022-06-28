@@ -82,9 +82,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotation: {fileID: 2955116610608049759}
   position: {fileID: 1244819427790332458}
-  boatSizeX: 0
-  boatSizeZ: 0
-  slidyForceMultiplier: 0
+  boatSizeX: 20
+  boatSizeZ: 10
+  slidyForceMultiplier: 30000
   currentSlidyVector: {x: 0, y: 0, z: 0}
 --- !u!1 &2955116611518277708
 GameObject:
