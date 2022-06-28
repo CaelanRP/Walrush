@@ -3820,15 +3820,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4974102162168602852}
-  m_LocalRotation: {x: 0.72613156, y: 0.24735327, z: -0.23844501, w: 0.5955614}
-  m_LocalPosition: {x: 0.1282836, y: -1.5286485, z: 0.31887957}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.7152773, y: 0.2755756, z: -0.20305528, w: 0.60926604}
+  m_LocalPosition: {x: 0.13253239, y: -1.513554, z: 0.32398862}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1143125342920757282}
   - {fileID: 4003027369173196108}
   m_Father: {fileID: 1374783399971065314}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 100.619995, y: 16.278, z: -24.083984}
+  m_LocalEulerAnglesHint: {x: 100.422, y: -14.507996, z: -54.24298}
 --- !u!114 &4964148612195658654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3857,8 +3857,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileToSpawn: {fileID: 1429527622249667014, guid: e5110925498cead428ded85e07ec9721, type: 3}
-  projectileGravity: 20
-  projectileDrag: 0
 --- !u!1 &4974215420797106667
 GameObject:
   m_ObjectHideFlags: 0
@@ -4160,8 +4158,8 @@ MonoBehaviour:
   effects:
   - effectType: 0
     timing: 0
-    worldShakeAmount: 100
-    worldShakeRange: 25
+    worldShakeAmount: 50
+    worldShakeRange: 15
     trembleAmount: 1
     trembleDuration: 0.1
     trembleRange: 100
@@ -4177,7 +4175,7 @@ MonoBehaviour:
     worldShakeRange: 100
     trembleAmount: 0.1
     trembleDuration: 0.1
-    trembleRange: 100
+    trembleRange: 15
     objectsKey: 
     objectsDuration: 0.1
     objectsRange: 30

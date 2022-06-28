@@ -205,7 +205,7 @@ MonoBehaviour:
   effects:
   - effectType: 0
     timing: 0
-    worldShakeAmount: -35
+    worldShakeAmount: 25
     worldShakeRange: 25
     trembleAmount: 1
     trembleDuration: 0.1
