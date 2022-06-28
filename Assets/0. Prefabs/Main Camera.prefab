@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9049683820458678877}
-  - component: {fileID: 7591753393364206311}
-  - component: {fileID: 1489572762}
   m_Layer: 0
   m_Name: PlayerTrackingArm
   m_TagString: Untagged
@@ -33,40 +31,6 @@ Transform:
   m_Father: {fileID: 9049683821380842365}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7591753393364206311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9049683820458678878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ceb12921aa0fdd49986f1645629f876, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpringInstance:
-    useTimeScale: 1
-    spring: 3
-    damper: 3
-    minDampVelocity: 0
---- !u!114 &1489572762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9049683820458678878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 261da4f16b1f81244b9eba27c2f89248, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wavePeriod: 0
-  waveAmplitude: 0
-  boatPendulumPosition: {fileID: 0}
-  currentWaveMagnitude: 0
-  sineTest: 0
 --- !u!1 &9049683820528619346
 GameObject:
   m_ObjectHideFlags: 0
@@ -77,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9049683820528619345}
   - component: {fileID: 9049683820528619344}
+  - component: {fileID: 7771025649084529200}
   m_Layer: 0
   m_Name: CamArm
   m_TagString: Untagged
@@ -92,7 +57,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9049683820528619346}
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 8.67, z: -11.28}
+  m_LocalPosition: {x: 0, y: 6.76, z: -11.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9049683820458678877}
@@ -141,6 +106,66 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &7771025649084529200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9049683820528619346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 9049683820528619345}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 1
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!1 &9049683821380842352
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,5 +220,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  horizontalLerpRate: 2
+  horizontalLerpRate: 4
   depthLerpRate: 6

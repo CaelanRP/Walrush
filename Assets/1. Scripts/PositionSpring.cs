@@ -29,6 +29,23 @@ public class PositionSpring : MonoBehaviour
 
     internal void AddForce(Vector3 force)
     {
-        vel += force;
+        vel += force * m;
+    }
+
+    internal void AddForce(Vector3 force, Vector3 pos, float range = 0)
+    {
+        float m = 1f;
+
+        if (range != 0)
+        {
+            float dist = Vector3.Distance(pos, transform.position);
+
+            if (dist > range)
+                return;
+
+            m = Mathf.Clamp((1f - (dist / range)), 0f, 1f);
+        }
+
+        vel += force * m;
     }
 }
