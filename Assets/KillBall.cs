@@ -7,7 +7,6 @@ public class KillBall : MonoBehaviour
     public float force;
     public float dmg = 101;
 
-    public ParticleSystem blood;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,15 +15,18 @@ public class KillBall : MonoBehaviour
         if (!effectable)
             return;
 
-        effectable.AddForce((other.transform.position - transform.position).normalized * force);
+        Vector3 forceDir = (other.transform.position - transform.position);
+        effectable.AddForce(forceDir.normalized * force);
 
-        blood.transform.position = other.ClosestPoint(transform.position);
-        blood.Play();
+        if (effectable is Effectable_Ragdoll)
+        {
+            if (!effectable.GetComponent<Ragdoll>().data.dead)
+            {
+                ParticleManager.instance.SpawnHit(other.ClosestPoint(transform.position), forceDir);
+            }
+        }
 
         effectable.TakeDamage(dmg);
-
-        
-
     }//
 
 }
