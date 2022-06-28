@@ -105,7 +105,7 @@ public class Walrus : Entity
 
     void Gore(){
         BoatRotator.Instance.Slam(goreSlamBoatTip, goreSlamBoatDip, transform.position);
-        Gamefeel.instance.AddTremble(20, 0.5f);
+        Gamefeel.instance.AddTremble(.2f, 0.2f);
     }
 
     void StartRush(){
@@ -114,7 +114,8 @@ public class Walrus : Entity
         BoatRotator.Instance.Slam(rushBoatTip, rushBoatDip, transform.position);
         vfx[0].Play();
 
-        Gamefeel.instance.AddTremble(2, 0.5f);
+        Gamefeel.instance.AddTremble(.2f, 0.2f);
+        Gamefeel.instance.AddRotationShake_World(transform.forward * 250, transform.position);
 
         UpdateDragValue();
     }
